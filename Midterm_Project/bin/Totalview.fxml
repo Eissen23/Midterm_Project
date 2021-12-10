@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="168.0" prefWidth="385.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ThirdScene">
+   <children>
+      <Text layoutX="37.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The total amount of money that need to be pay " textAlignment="CENTER" wrappingWidth="311.73667907714844">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Button layoutX="289.0" layoutY="122.0" mnemonicParsing="false" onAction="#btnback" text="Back">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Label fx:id="totalMoney" alignment="CENTER" layoutX="27.0" layoutY="74.0" prefHeight="30.0" prefWidth="332.0" text="Label">
+         <font>
+            <Font size="19.0" />
+         </font></Label>
+   </children>
+</AnchorPane>
