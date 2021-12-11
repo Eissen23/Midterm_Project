@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,7 +23,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.*;
 
 
@@ -113,10 +113,9 @@ public class MainScene implements Initializable{
     //This method is gonna be called whenever the view load : App.java 
 
     //file chooser
-    @FXML
-    HBox hbMenu;
-
     FileChooser fileChooser = new FileChooser();
+    //this will represent the file you use in the time
+    static String curFilePath;
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
@@ -318,23 +317,49 @@ public class MainScene implements Initializable{
     }
 
     public void saveClicked(ActionEvent ev){
-        
         Window saveScreen = anchorPane.getScene().getWindow();
-        fileChooser.setTitle("Save file");
-        fileChooser.setInitialFileName("mydata");
         fileChooser.getExtensionFilters().addAll( new FileChooser.ExtensionFilter("Binary file", "*.bin"));
-
+        try{
+            if(SaveLoad.isSaved){
+                // handle the second and beyond save
+                SaveLoad.saveFile(staffList, curFilePath);
+                return;
+            }
+            fileChooser.setTitle("Save file");
+            fileChooser.setInitialFileName("mydata");
+           
+            //make a file that has the directory according to the dialog
+            File file = fileChooser.showSaveDialog(saveScreen);
+            fileChooser.setInitialDirectory(file.getParentFile());
+            SaveLoad.saveFile(staffList, file.getPath());
+            curFilePath = file.getPath();
+        }catch(Exception ex){}
+    }
+    
+    public void saveAsClicked(ActionEvent ev){
+        Window saveScreen = anchorPane.getScene().getWindow();
+        fileChooser.setTitle("Save File As");
+        fileChooser.setInitialFileName("mydata");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Binary File", "*.bin"));
         try{
             File file = fileChooser.showSaveDialog(saveScreen);
             fileChooser.setInitialDirectory(file.getParentFile());
             SaveLoad.saveFile(staffList, file.getPath());
-            //  System.out.println(file.getPath());
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
-        
+            curFilePath = file.getPath();
+        }catch(Exception ex){}
     }
-    
+
+    public void exportClicked(ActionEvent ev){
+        Window exportScreen = anchorPane.getScene().getWindow();
+        fileChooser.setTitle("Export File");
+        fileChooser.setInitialFileName("Manager_Doc");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text file","*txt"));
+        try{
+            File file = fileChooser.showSaveDialog(exportScreen);
+            SaveLoad.saveFile(staffList, file.getPath());
+        }catch(Exception ex){}
+    }
+
     public void loadClicked(ActionEvent ev){
         Window loadScreen = anchorPane.getScene().getWindow();
         fileChooser.setTitle("Load file");
@@ -347,9 +372,8 @@ public class MainScene implements Initializable{
             staffList = SaveLoad.loadFile(file.getPath(), staffList);
             table1.setItems(staffList);
             table1.refresh();
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
+            curFilePath = file.getPath();
+        }catch(Exception ex){}
     }
 
     //connected to the "Listing Staff's Salary button", detail at Tableview.fxml:73

@@ -107,16 +107,18 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <HBox fx:id="hbMenu" layoutX="36.0" layoutY="28.0">
+      <HBox layoutX="36.0" layoutY="28.0">
          <children>
             <MenuBar fx:id="menuBar">
               <menus>
                 <Menu fx:id="fileMenu" mnemonicParsing="false" text="_File">
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#saveClicked" text="Save" />
-                        <MenuItem mnemonicParsing="false" text="Save As" />
+                        <MenuItem mnemonicParsing="false" onAction="#saveAsClicked" text="Save As" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" onAction="#loadClicked" text="Load" />
+                        <MenuItem mnemonicParsing="false" onAction="#exportClicked" text="Export File" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#loadClicked" text="Open" />
                      </items>
                   </Menu>
                 <Menu fx:id="aboutMenu" mnemonicParsing="false" text="_Help">

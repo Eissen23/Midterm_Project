@@ -3,6 +3,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 class SaveLoad {
-    
+    //to reduce saving process
+    public static boolean isSaved = false;
+
     public static void saveFile(ObservableList<Staff> list, String directory){
         try{
         
@@ -27,6 +30,7 @@ class SaveLoad {
         } catch(IOException ex) {
             ex.printStackTrace();
         }
+        isSaved = true;
     }
 
     public static ObservableList<Staff> loadFile(String directory, ObservableList<Staff> currentList){
@@ -46,6 +50,21 @@ class SaveLoad {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+        isSaved = true;
+
         return currentList;
+    }
+
+    public static void exportFile(ObservableList<Staff> list, String directory) throws IOException{
+        FileWriter writer = new FileWriter(directory);
+
+        for(Staff data: list){
+            writer.write("Staff Infor \n");
+            writer.write("Name \tUnit \tBasic Salary \tCoefficient Salary " 
+            +"\tBonus Salary \tDay of Work \tCategory");
+            writer.write(data.getName1()+"\t "+data.getWorku1());
+            writer.write(String.valueOf(data));
+        }
     }
 }
