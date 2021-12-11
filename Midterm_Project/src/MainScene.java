@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Path;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -121,6 +120,7 @@ public class MainScene implements Initializable{
     public void initialize(URL location, ResourceBundle resources)
     {   
         fileChooser.setInitialDirectory(new File("C:\\Users\\PC\\Documents"));
+        fileChooser.getExtensionFilters().addAll( new FileChooser.ExtensionFilter("Binary file", "*.bin"));
         //this is for testing only
         staffList = FXCollections.observableArrayList();
 
@@ -318,7 +318,6 @@ public class MainScene implements Initializable{
 
     public void saveClicked(ActionEvent ev){
         Window saveScreen = anchorPane.getScene().getWindow();
-        fileChooser.getExtensionFilters().addAll( new FileChooser.ExtensionFilter("Binary file", "*.bin"));
         try{
             if(SaveLoad.isSaved){
                 // handle the second and beyond save
@@ -340,7 +339,6 @@ public class MainScene implements Initializable{
         Window saveScreen = anchorPane.getScene().getWindow();
         fileChooser.setTitle("Save File As");
         fileChooser.setInitialFileName("mydata");
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Binary File", "*.bin"));
         try{
             File file = fileChooser.showSaveDialog(saveScreen);
             fileChooser.setInitialDirectory(file.getParentFile());
@@ -356,15 +354,14 @@ public class MainScene implements Initializable{
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text file","*txt"));
         try{
             File file = fileChooser.showSaveDialog(exportScreen);
-            SaveLoad.saveFile(staffList, file.getPath());
+            SaveLoad.exportFile(staffList, file.getPath());
         }catch(Exception ex){}
+        fileChooser.getExtensionFilters().remove(2);
     }
 
     public void loadClicked(ActionEvent ev){
         Window loadScreen = anchorPane.getScene().getWindow();
         fileChooser.setTitle("Load file");
-
-        fileChooser.getExtensionFilters().addAll( new FileChooser.ExtensionFilter("Binary file", "*.bin"));
 
         try{
             File file = fileChooser.showOpenDialog(loadScreen);

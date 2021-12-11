@@ -59,12 +59,16 @@ class SaveLoad {
     public static void exportFile(ObservableList<Staff> list, String directory) throws IOException{
         FileWriter writer = new FileWriter(directory);
 
+        writer.write("Staff Infor \n");
+        writer.write("Name \tUnit \tCoefficient Salary " 
+            +"\tBonus Salary \tDay of Work \tSalary(VND) \tCategory \n");
         for(Staff data: list){
-            writer.write("Staff Infor \n");
-            writer.write("Name \tUnit \tBasic Salary \tCoefficient Salary " 
-            +"\tBonus Salary \tDay of Work \tCategory");
-            writer.write(data.getName1()+"\t "+data.getWorku1());
-            writer.write(String.valueOf(data));
+            
+            writer.write(data.getName1()+" \t"+data.getWorku1()+" \t");
+            writer.write(String.valueOf(data.getBasic1())+" \t"+String.valueOf(data.getBonus1())+" \t");
+            writer.write(String.valueOf(data.getDay1())+" \t"+data.getCategori1()+ " \n");
         }
+
+        writer.close();
     }
 }
