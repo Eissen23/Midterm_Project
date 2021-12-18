@@ -38,7 +38,7 @@ class SaveLoad {
         try {
             FileInputStream fis = new FileInputStream(directory);
             ObjectInputStream ois = new ObjectInputStream(fis);
-                
+            
             List<Staff>data = (List<Staff>) ois.readObject();
             
             currentList =FXCollections.observableArrayList();

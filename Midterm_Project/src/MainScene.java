@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -12,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -20,13 +22,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.*;
 
 
 public class MainScene implements Initializable{
-
+    //declare an AnchorPane represent the GUI
     @FXML
     AnchorPane anchorPane;
 
@@ -88,18 +91,14 @@ public class MainScene implements Initializable{
     private TextField categoriText;
 
     @FXML
-    private TextField searchCoeffi;
-
-    @FXML
-    private TextField searchName;
-
-    @FXML
-    private TextField searchWorku;
+    private TextField searchAll;
 
     @FXML
     //create a choice box for enhanced categorizing
     ChoiceBox<String> staffCate;
 
+    @FXML 
+    private CheckBox rememberWork;
     //create a menu box
     @FXML
     MenuBar menuBar;
@@ -137,17 +136,16 @@ public class MainScene implements Initializable{
         //set the item: the ObservableList of Staff, for display
         table1.setItems(staffList);
         //set the item for choice box
-        staffCate.getItems().addAll("Teacher", "Adminstrative Staff");
+        staffCate.getItems().addAll("Teacher", "Administrative Staff");
         //set the first categorize box as blank
-        staffCate.getSelectionModel().select(null);
+        staffCate.getSelectionModel().select(0);
       
         table1.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         
         //wrap the ObservabelList in a FilteredList, initialy display all data
         FilteredList<Staff> filteredData = new FilteredList<>(staffList, b -> true);
 
-        //set the filter predicate whenever there is a change in TextField: searchName
-        searchName.textProperty().addListener((observable, oldValue, newValue) -> {
+        searchAll.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(staff ->{
                 //if the TextField is empty, display all data
                 if(newValue == null|| newValue.isEmpty()){
@@ -157,41 +155,12 @@ public class MainScene implements Initializable{
                 String lowerCaseFilter = newValue.toLowerCase();
 
                 //compare the lowercase version of both value (the staff'name and the newValue)
-                if (staff.getName1().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                if (staff.getName1().toLowerCase().indexOf(lowerCaseFilter) != -1 || staff.getWorku1().toLowerCase().indexOf(lowerCaseFilter) != -1 || String.valueOf(staff.getBasic1()).indexOf(lowerCaseFilter) != -1){
                     return true; // if the values are alike, return the data
                 }
                 else
-                return false; // if not, don't return the data
-                
-            });
-        });
-        searchWorku.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(staff ->{
-                if(newValue == null|| newValue.isEmpty()){
-                    return true;
-                }
-                String lowerCaseFilter = newValue.toLowerCase();
-
-                if (staff.getWorku1().toLowerCase().indexOf(lowerCaseFilter) != -1){
-                    return true;
-                }
-                else
-                return false;
-                
-            });
-        });
-        searchCoeffi.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(staff ->{
-                if(newValue == null|| newValue.isEmpty()){
-                    return true;
-                }
-                String lowerCaseFilter = newValue.toLowerCase();
-
-                if (String.valueOf(staff.getBasic1()).indexOf(lowerCaseFilter) != -1){
-                    return true;
-                }
-                else
-                return false;
+                    // if not, don't return the data
+                    return false;
                 
             });
         });
@@ -219,23 +188,25 @@ public class MainScene implements Initializable{
         newStaff.setBonus1(Double.parseDouble(bonussalText.getText()));
         newStaff.setDay1(Integer.parseInt(daysText.getText()));
         newStaff.setCategori1(staffCate.getValue());
-        double money;
+        long money;
         if(newStaff.getCategori1() == "Teacher"){   
-            money = newStaff.getBasic1() * 750000 + newStaff.getBonus1() + newStaff.getDay1() * 45000;
+            money = (long)(newStaff.getBasic1() * 750000 + newStaff.getBonus1() + newStaff.getDay1() * 45000);
         }
         else{
-            money = newStaff.getBasic1() * 750000 + newStaff.getBonus1() + newStaff.getDay1() * 200000;
+            money = (long)(newStaff.getBasic1() * 750000 + newStaff.getBonus1() + newStaff.getDay1() * 200000);
         }
-        newStaff.setSalary((long)money);
+        newStaff.setSalary(money);
 
         //in the end add the the ObservableList for display
         staffList.add(newStaff);  
         //clear the TextField
         nameText.clear();
-        workunitText.clear();
         basicsalText.clear();
         bonussalText.clear();
         daysText.clear();
+        if(rememberWork.isSelected()==false){
+            workunitText.clear();
+        }
     }
 
     // connected to the "Delete Imformation"  button, Tableview.fxml: 29
@@ -248,20 +219,18 @@ public class MainScene implements Initializable{
         table1.getSelectionModel().clearSelection();
     }
     
+     //clear the name text when pressed the "R" key
     @FXML
-    //stop selecting the row when click from the outside
-    void clearSelected1(MouseEvent event)
-    {
-        table1.getSelectionModel().clearSelection();
-    }
-
-    @FXML
-    void clearSelected2(ActionEvent event) {
-        nameText.clear();
-        workunitText.clear();
-        basicsalText.clear();
-        bonussalText.clear();
-        daysText.clear();
+    void clearSelection(KeyEvent event){
+        if(event.getCode().toString() =="R")
+        {
+            table1.getSelectionModel().clearSelection();
+            nameText.clear();
+            workunitText.clear();
+            basicsalText.clear();
+            bonussalText.clear();
+            daysText.clear();
+        }
     }
 
 
@@ -289,31 +258,36 @@ public class MainScene implements Initializable{
     {
         Staff selected1 = table1.getSelectionModel().getSelectedItem();
         if (staffList.remove(selected1)){
-        table1.getSelectionModel().clearSelection(0);
+            table1.getSelectionModel().clearSelection(0);
         
-        Staff newStaff = new Staff();
-        newStaff.setName1(nameText.getText());
-        newStaff.setWorku1(workunitText.getText());
-        newStaff.setBasic1(Double.parseDouble(basicsalText.getText()));
-        newStaff.setBonus1(Double.parseDouble(bonussalText.getText()));
-        newStaff.setDay1(Integer.parseInt(daysText.getText()));
+            Staff newStaff = new Staff();
+            newStaff.setName1(nameText.getText());
+            newStaff.setWorku1(workunitText.getText());
+            newStaff.setBasic1(Double.parseDouble(basicsalText.getText()));
+            newStaff.setBonus1(Double.parseDouble(bonussalText.getText()));
+            newStaff.setDay1(Integer.parseInt(daysText.getText()));
 
-        newStaff.setCategori1(staffCate.getValue());
-        if (selected1.getCategori1() == "Teacher")
-        {
-            Long money1 = (long) (newStaff.getBasic1() * 750000 + newStaff.getBonus1() + newStaff.getDay1() * 45000);
-            newStaff.setSalary(money1);
-            // newStaff.setCategori1("Teacher");
+            newStaff.setCategori1(staffCate.getValue());
+            if (selected1.getCategori1() == "Teacher"){
+
+                Long money1 = (long) (newStaff.getBasic1() * 750000 + newStaff.getBonus1() + newStaff.getDay1() * 45000);
+                newStaff.setSalary(money1);
+            }
+            else 
+            {
+                Long money2 = (long) (newStaff.getBasic1() * 750000 + newStaff.getBonus1() + newStaff.getDay1() * 200000);
+                newStaff.setSalary(money2);
+            }
+            staffList.add(newStaff);
+            table1.getSelectionModel().clearSelection();
+            nameText.clear();
+            workunitText.clear();
+            basicsalText.clear();
+            bonussalText.clear();
+            daysText.clear();
+
         }
-        else 
-        {
-            Long money2 = (long) (newStaff.getBasic1() * 750000 + newStaff.getBonus1() + newStaff.getDay1() * 200000);
-            newStaff.setSalary(money2);
-            // newStaff.setCategori1("Adminstrative Staff");
-        }
-        staffList.add(newStaff);
-        table1.getSelectionModel().clearSelection();
-        }
+        
     }
 
     public void saveClicked(ActionEvent ev){
@@ -351,12 +325,11 @@ public class MainScene implements Initializable{
         Window exportScreen = anchorPane.getScene().getWindow();
         fileChooser.setTitle("Export File");
         fileChooser.setInitialFileName("Manager_Doc");
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text file","*txt"));
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text file","*.txt"), new FileChooser.ExtensionFilter("Docx file", "*.docx"));
         try{
             File file = fileChooser.showSaveDialog(exportScreen);
             SaveLoad.exportFile(staffList, file.getPath());
         }catch(Exception ex){}
-        fileChooser.getExtensionFilters().remove(2);
     }
 
     public void loadClicked(ActionEvent ev){
