@@ -22,6 +22,7 @@ public class App extends Application{
 
         window.setOnCloseRequest(e ->{
 
+            //prevent the logic error
             e.consume();
             closeRequest();
 
@@ -35,11 +36,12 @@ public class App extends Application{
     }
 
     public void closeRequest(){
+        //choose the type of alert box, this case Confirmation box
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Exit the program");
+        alert.setTitle("EXIT");
 
         alert.setHeaderText("Are you sure you wanted to exit the program?");
-        alert.setContentText("Note: this dialog will always be shown to remind you of saving your work");
+        alert.setContentText("Note: this dialog will always be shown to remind you of saving your work.");
 
         Optional<ButtonType> result = alert.showAndWait();
 

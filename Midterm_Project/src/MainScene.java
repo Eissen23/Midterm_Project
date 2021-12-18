@@ -1,3 +1,4 @@
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -118,7 +119,7 @@ public class MainScene implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {   
-        fileChooser.setInitialDirectory(new File("C:\\Users\\PC\\Documents"));
+        fileChooser.setInitialDirectory(new File("C:"));
         fileChooser.getExtensionFilters().addAll( new FileChooser.ExtensionFilter("Binary file", "*.bin"));
         //this is for testing only
         staffList = FXCollections.observableArrayList();
@@ -290,6 +291,7 @@ public class MainScene implements Initializable{
         
     }
 
+    @FXML
     public void saveClicked(ActionEvent ev){
         Window saveScreen = anchorPane.getScene().getWindow();
         try{
@@ -303,12 +305,14 @@ public class MainScene implements Initializable{
            
             //make a file that has the directory according to the dialog
             File file = fileChooser.showSaveDialog(saveScreen);
+            //set the next directory as the folder that contain the 
             fileChooser.setInitialDirectory(file.getParentFile());
             SaveLoad.saveFile(staffList, file.getPath());
             curFilePath = file.getPath();
         }catch(Exception ex){}
     }
-    
+
+    @FXML
     public void saveAsClicked(ActionEvent ev){
         Window saveScreen = anchorPane.getScene().getWindow();
         fileChooser.setTitle("Save File As");
@@ -321,6 +325,7 @@ public class MainScene implements Initializable{
         }catch(Exception ex){}
     }
 
+    @FXML
     public void exportClicked(ActionEvent ev){
         Window exportScreen = anchorPane.getScene().getWindow();
         fileChooser.setTitle("Export File");
@@ -332,6 +337,7 @@ public class MainScene implements Initializable{
         }catch(Exception ex){}
     }
 
+    @FXML
     public void loadClicked(ActionEvent ev){
         Window loadScreen = anchorPane.getScene().getWindow();
         fileChooser.setTitle("Load file");
@@ -346,8 +352,39 @@ public class MainScene implements Initializable{
         }catch(Exception ex){}
     }
 
+    @FXML 
+    // show the credit of the program
+    public void showAbout(ActionEvent ev) throws IOException{
+
+        Stage window = new Stage();
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("AboutDialog.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle("ABOUT");
+        window.setScene(scene);
+        window.show();
+    }
+
+    @FXML 
+    public void showInstruction(ActionEvent ev){
+        try{
+            URL url = getClass().getResource("Readme.txt");
+            File file = new File(url.getPath());
+            // Process process = Runtime.getRuntime().exec("rundll32 url.dll, FileProtocolHandler " + url.getPath());
+            // process.waitFor();
+
+            Desktop.getDesktop().open(file);
+        }catch(Exception ex){
+
+        }
+    }
     //connected to the "Listing Staff's Salary button", detail at Tableview.fxml:73
     //jump to the next window
+    @FXML
     public void gonext(ActionEvent event) throws IOException {
         //make a new window
         Stage window = new Stage();
@@ -370,6 +407,7 @@ public class MainScene implements Initializable{
     
     //connected to the "Total staff's salary", detail at Tableview.fxml:74
     // this method is alike to the previous one 
+    @FXML
     public void gonext2(ActionEvent event) throws IOException {
         Stage window = new Stage();
         FXMLLoader loading = new FXMLLoader();
