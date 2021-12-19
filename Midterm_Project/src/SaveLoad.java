@@ -5,9 +5,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.List;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 class SaveLoad {
@@ -33,17 +31,15 @@ class SaveLoad {
         isSaved = true;
     }
 
-    public static ObservableList<Staff> loadFile(String directory, ObservableList<Staff> currentList){
-    
+    public static ArrayList<Staff> loadFile(String directory){
+        
+        ArrayList<Staff>data = new ArrayList<>();
         try {
             FileInputStream fis = new FileInputStream(directory);
             ObjectInputStream ois = new ObjectInputStream(fis);
             
-            List<Staff>data = (List<Staff>) ois.readObject();
+            data = (ArrayList<Staff>) ois.readObject();
             
-            currentList =FXCollections.observableArrayList();
-            currentList = FXCollections.observableArrayList(data);
-
             fis.close();
             ois.close();
                
@@ -53,7 +49,7 @@ class SaveLoad {
         
         isSaved = true;
 
-        return currentList;
+        return data;
     }
 
     public static void exportFile(ObservableList<Staff> list, String directory) throws IOException{

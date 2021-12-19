@@ -2,6 +2,7 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -345,8 +346,13 @@ public class MainScene implements Initializable{
         try{
             File file = fileChooser.showOpenDialog(loadScreen);
             fileChooser.setInitialDirectory(file.getParentFile());
-            staffList = SaveLoad.loadFile(file.getPath(), staffList);
-            table1.setItems(staffList);
+            ArrayList<Staff> data = SaveLoad.loadFile(file.getPath());
+            
+            staffList.clear();
+            for(int i = 0; i < data.size(); i++){
+                staffList.add(data.get(i));
+            }
+            
             table1.refresh();
             curFilePath = file.getPath();
         }catch(Exception ex){}
@@ -372,11 +378,10 @@ public class MainScene implements Initializable{
     @FXML 
     public void showInstruction(ActionEvent ev){
         try{
+            //use this method to get relative file path inside folder
             URL url = getClass().getResource("Readme.txt");
             File file = new File(url.getPath());
-            // Process process = Runtime.getRuntime().exec("rundll32 url.dll, FileProtocolHandler " + url.getPath());
-            // process.waitFor();
-
+            //open the file using the os feature
             Desktop.getDesktop().open(file);
         }catch(Exception ex){
 
