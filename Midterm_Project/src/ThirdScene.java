@@ -1,7 +1,14 @@
+/**
+ * @author
+ * Coded and created by Le Minh Nghia
+ *  The Student Series: 20207694
+ * Class: IT-VUW 01-K65
+ * 
+ */
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

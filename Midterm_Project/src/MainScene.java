@@ -1,10 +1,24 @@
+/**
+ * @author
+ * Project group: 3 
+ * Add method, clear selection method  by Le Minh Nghia 
+ * The Student Series: 20207694
+ * Class: IT-VUW 01-K65
+ * 
+ * Initialize method, delete, fix method by Nguyen Minh Duc 
+ * The Student Series: 20207664
+ * Class: IT-VUW 01-K65
+ * 
+ *  Created and coded by Pham Duc Phuc 
+ * The Student Series: 20207698
+ * Class: IT-VUW 01-K65
+ */
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -103,17 +117,17 @@ public class MainScene implements Initializable{
     private CheckBox rememberWork;
     //create a menu box
     @FXML
-    MenuBar menuBar;
+    private MenuBar menuBar;
 
     @FXML
-    Menu fileMenu;
+    private Menu fileMenu;
 
     @FXML 
-    Menu aboutMenu;
+    private Menu aboutMenu;
     //This method is gonna be called whenever the view load : App.java 
 
     //file chooser
-    FileChooser fileChooser = new FileChooser();
+     FileChooser fileChooser = new FileChooser();
     //this will represent the file you use in the time
     static String curFilePath;
 
@@ -145,9 +159,9 @@ public class MainScene implements Initializable{
         table1.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         
         //wrap the ObservabelList in a FilteredList, initialy display all data
-        FilteredList<Staff> filteredData = new FilteredList<>(staffList, b -> true);
+        FilteredList<Staff> filteredData = new FilteredList<>(staffList);
 
-        searchAll.textProperty().addListener((observable, oldValue, newValue) -> {
+        searchAll.textProperty().addListener((observ, oldValue, newValue) -> {
             filteredData.setPredicate(staff ->{
                 //if the TextField is empty, display all data
                 if(newValue == null|| newValue.isEmpty()){
@@ -157,7 +171,9 @@ public class MainScene implements Initializable{
                 String lowerCaseFilter = newValue.toLowerCase();
 
                 //compare the lowercase version of both value (the staff'name and the newValue)
-                if (staff.getName1().toLowerCase().indexOf(lowerCaseFilter) != -1 || staff.getWorku1().toLowerCase().indexOf(lowerCaseFilter) != -1 || String.valueOf(staff.getBasic1()).indexOf(lowerCaseFilter) != -1){
+                if (staff.getName1().toLowerCase().indexOf(lowerCaseFilter) != -1 ||
+                 staff.getWorku1().toLowerCase().indexOf(lowerCaseFilter) != -1 ||
+                 String.valueOf(staff.getBasic1()).indexOf(lowerCaseFilter) != -1){
                     return true; // if the values are alike, return the data
                 }
                 else
@@ -215,10 +231,14 @@ public class MainScene implements Initializable{
     public void delete (ActionEvent e)
 
     {   
-        //on selected and after choose the delete button, remove the selected row out of the table 
-        Staff selected1 = table1.getSelectionModel().getSelectedItem();
-        staffList.remove(selected1);
+        //remove all selected items on viewtable
+        staffList.removeAll(table1.getSelectionModel().getSelectedItems());
         table1.getSelectionModel().clearSelection();
+        nameText.clear();
+        workunitText.clear();
+        basicsalText.clear();
+        bonussalText.clear();
+        daysText.clear();
     }
     
      //clear the name text when pressed the "R" key
@@ -235,6 +255,15 @@ public class MainScene implements Initializable{
         }
     }
 
+    @FXML
+    void clearSelection2(ActionEvent event){
+        table1.getSelectionModel().clearSelection();
+         nameText.clear();
+        workunitText.clear();
+        basicsalText.clear();
+        bonussalText.clear();
+        daysText.clear();
+    }
 
     @FXML
     // choose a row, this will also display all the value into the TextField, allow for fix() method to work
@@ -255,7 +284,7 @@ public class MainScene implements Initializable{
     }
     
     @FXML
-    //more explaination in the  future readme.txt file 
+    //delete the original Staff and replace it with the fixed one
     void fix(ActionEvent event) 
     {
         Staff selected1 = table1.getSelectionModel().getSelectedItem();
@@ -283,17 +312,20 @@ public class MainScene implements Initializable{
             staffList.add(newStaff);
             table1.getSelectionModel().clearSelection();
             nameText.clear();
-            workunitText.clear();
             basicsalText.clear();
             bonussalText.clear();
             daysText.clear();
-
+            if (rememberWork.isSelected() == false) {
+                workunitText.clear();
+            }
         }
         
     }
 
     @FXML
-    public void saveClicked(ActionEvent ev){
+    // the refined save with fully functional
+    public void saveClicked(ActionEvent e){
+        // so that the save dialog will pop up in this scene
         Window saveScreen = anchorPane.getScene().getWindow();
         try{
             if(SaveLoad.isSaved){
@@ -308,13 +340,19 @@ public class MainScene implements Initializable{
             File file = fileChooser.showSaveDialog(saveScreen);
             //set the next directory as the folder that contain the 
             fileChooser.setInitialDirectory(file.getParentFile());
+
+            //save the staff's list into the file we chosed
             SaveLoad.saveFile(staffList, file.getPath());
+
+            /* set the current file path into a static attribute 
+            so that we can work with it later one*/
             curFilePath = file.getPath();
         }catch(Exception ex){}
     }
 
     @FXML
-    public void saveAsClicked(ActionEvent ev){
+    // the save as method, same as above but without handling secondsave
+    public void saveAsClicked(ActionEvent e){
         Window saveScreen = anchorPane.getScene().getWindow();
         fileChooser.setTitle("Save File As");
         fileChooser.setInitialFileName("mydata");
@@ -327,40 +365,54 @@ public class MainScene implements Initializable{
     }
 
     @FXML
-    public void exportClicked(ActionEvent ev){
+    //export the file into readable document
+    public void exportClicked(ActionEvent e){
         Window exportScreen = anchorPane.getScene().getWindow();
         fileChooser.setTitle("Export File");
         fileChooser.setInitialFileName("Manager_Doc");
+        
+        // add a new extenstion filter for txt file
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text file","*.txt"), new FileChooser.ExtensionFilter("Docx file", "*.docx"));
         try{
+            //export the text file use exportFile method
             File file = fileChooser.showSaveDialog(exportScreen);
             SaveLoad.exportFile(staffList, file.getPath());
         }catch(Exception ex){}
     }
 
     @FXML
-    public void loadClicked(ActionEvent ev){
+    //load the binary data into the table
+    public void loadClicked(ActionEvent e){
         Window loadScreen = anchorPane.getScene().getWindow();
         fileChooser.setTitle("Load file");
 
         try{
             File file = fileChooser.showOpenDialog(loadScreen);
             fileChooser.setInitialDirectory(file.getParentFile());
+
+            // the array list contain the data from the bin file
+            // it contain the staffList you  wanna work with 
             ArrayList<Staff> data = SaveLoad.loadFile(file.getPath());
             
+            //clear the entire staff list for the imported one
             staffList.clear();
+
+            //for each element add the staff into the staffList
+            // the sorted and filtered list can be update also
             for(int i = 0; i < data.size(); i++){
                 staffList.add(data.get(i));
             }
             
+            //refresh the table so that the information shown is up-to-date
             table1.refresh();
+            //get the file path to the file we just load
             curFilePath = file.getPath();
         }catch(Exception ex){}
     }
 
     @FXML 
     // show the credit of the program
-    public void showAbout(ActionEvent ev) throws IOException{
+    public void showAbout(ActionEvent e) throws IOException{
 
         Stage window = new Stage();
 
@@ -376,7 +428,7 @@ public class MainScene implements Initializable{
     }
 
     @FXML 
-    public void showInstruction(ActionEvent ev){
+    public void showInstruction(ActionEvent e){
         try{
             //use this method to get relative file path inside folder
             URL url = getClass().getResource("Readme.txt");

@@ -2,33 +2,46 @@
 
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="390.0" prefWidth="637.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label alignment="CENTER" layoutX="227.0" layoutY="65.0" prefHeight="35.0" prefWidth="182.0" text="ABOUT US">
+      <ImageView layoutX="203.0" layoutY="92.0" opacity="0.47" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../src/image/bachkhoalogo.png" />
+         </image>
+         <effect>
+            <Blend />
+         </effect>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="261.0" layoutY="64.0" text="ABOUT US">
          <font>
             <Font name="Tahoma" size="22.0" />
          </font>
       </Label>
-      <Text layoutX="46.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The project started on ... and finished  on .." wrappingWidth="491.41680908203125" />
-      <VBox layoutX="64.0" layoutY="136.0" prefHeight="113.0" prefWidth="526.0">
+      <Text layoutX="52.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The project started on ... and finished  on .." wrappingWidth="491.41680908203125">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+      <VBox layoutX="137.0" layoutY="128.0" prefHeight="70.0" prefWidth="303.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lê Minh Nghĩa    20207694    IT-VUW 01-K65 " textAlignment="CENTER" wrappingWidth="502.25946044921875">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lê Minh Nghĩa    20207694    IT-VUW 01-K65 " wrappingWidth="350.2594299316406">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nguyễn Minh Đức    20207664    IT-VUW 01-K65 " textAlignment="CENTER" wrappingWidth="523.0593872070312">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nguyễn Minh Đức    20207664    IT-VUW 01-K65 " wrappingWidth="351.8592834472656">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Phạm Đức Phúc    20207698    IT-VUW 01-K65 " textAlignment="CENTER" wrappingWidth="504.65948486328125">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Phạm Đức Phúc    20207698    IT-VUW 01-K65 " wrappingWidth="351.8594055175781">
                <font>
                   <Font size="16.0" />
                </font>
@@ -42,6 +55,9 @@
             <Hyperlink prefHeight="24.0" prefWidth="95.0" text="Hyperlink" />
          </children>
       </VBox>
-      <Text layoutX="46.0" layoutY="321.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Document:" />
+      <Text layoutX="52.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reference:" wrappingWidth="73.60001983642576">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
    </children>
 </AnchorPane>

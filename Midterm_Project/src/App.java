@@ -1,5 +1,17 @@
+/**
+ * @author
+ * Project group: 3
+ * 
+ * Start method, main: Nguyen Minh Duc 
+ * The Student Series: 20207664
+ * Class: IT-VUW 01-K65
+ * 
+ * closeRequest(), setOncloseRequest: coded by Pham Duc Phuc
+ * The Student Series: 20207698
+ * Class: IT-VUW 01-K65
+ * 
+*/
 import java.util.Optional;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

@@ -1,3 +1,10 @@
+/**
+ * @author 
+ * Coded and created by Nguyen Minh Duc
+ * Student series 20207664
+ * Class IT-VUW 01-K65
+*/
+
 import java.io.Serializable;
 
 public class Staff implements Serializable {
