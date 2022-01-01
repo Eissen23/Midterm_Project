@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#clearSelection" prefHeight="770.0" prefWidth="1418.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainScene">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#clearSelection" prefHeight="728.0" prefWidth="1374.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainScene">
    <children>
       <TableView fx:id="table1" layoutX="36.0" layoutY="74.0" onMouseClicked="#getSelected1">
         <columns>
@@ -28,63 +28,58 @@
             <TableColumn fx:id="categoriColumn" prefWidth="197.5999755859375" text="Categorization" />
         </columns>
       </TableView>
-      <TextField fx:id="nameText" layoutX="1211.0" layoutY="99.0" prefHeight="26.0" prefWidth="150.0" promptText="Name" />
-      <TextField fx:id="workunitText" layoutX="1211.0" layoutY="162.0" promptText="Work Unit" />
-      <TextField fx:id="basicsalText" layoutX="1211.0" layoutY="226.0" promptText="Coefficient Salary" />
-      <TextField fx:id="bonussalText" layoutX="1211.0" layoutY="285.0" promptText="Bonus Salary" />
-      <TextField fx:id="daysText" layoutX="1211.0" layoutY="358.0" promptText="Working days/Teaching days" />
-      <Button alignment="CENTER" layoutX="972.0" layoutY="569.0" mnemonicParsing="false" onAction="#delete" prefHeight="32.0" prefWidth="122.0" text="Delete information" textAlignment="CENTER" />
-      <Button alignment="CENTER" layoutX="1219.0" layoutY="492.0" mnemonicParsing="false" onAction="#add" prefHeight="32.0" prefWidth="122.0" text="Add employee" />
-      <Text layoutX="1205.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Staff's Name">
+      <TextField fx:id="nameText" layoutX="1093.0" layoutY="79.0" prefHeight="32.0" prefWidth="150.0" promptText="Name" />
+      <TextField fx:id="workunitText" layoutX="1093.0" layoutY="143.0" prefHeight="32.0" prefWidth="150.0" promptText="Work Unit" />
+      <TextField fx:id="basicsalText" layoutX="1093.0" layoutY="207.0" prefHeight="32.0" prefWidth="150.0" promptText="Coefficient Salary" />
+      <TextField fx:id="bonussalText" layoutX="1093.0" layoutY="266.0" prefHeight="32.0" prefWidth="150.0" promptText="Bonus Salary" />
+      <TextField fx:id="daysText" layoutX="1093.0" layoutY="340.0" prefWidth="150.0" promptText="Working days/Teaching days" />
+      <Button alignment="CENTER" layoutX="1049.0" layoutY="535.0" mnemonicParsing="false" onAction="#delete" prefHeight="32.0" prefWidth="122.0" text="Delete information" textAlignment="CENTER" />
+      <Button alignment="CENTER" layoutX="1093.0" layoutY="472.0" mnemonicParsing="false" onAction="#add" prefHeight="32.0" prefWidth="122.0" text="Add employee" />
+      <Text layoutX="1093.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Staff's Name">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Text layoutX="1205.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Staff's Work Unit">
+      <Text layoutX="1093.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Staff's Work Unit">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Text layoutX="1205.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Coefficient Salary" wrappingWidth="161.4879150390625">
+      <Text layoutX="1096.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Coefficient Salary" wrappingWidth="161.4879150390625">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Text layoutX="1205.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Bonus Salary">
+      <Text layoutX="1093.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Bonus Salary">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Text layoutX="1205.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter number of Teaching lessions / Working days" wrappingWidth="206.3585205078125">
+      <Text layoutX="1095.0" layoutY="321.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter number of Teaching lessions / Working days" wrappingWidth="206.3585205078125">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Text layoutX="1205.0" layoutY="413.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Staff Catergorizing">
+      <Text layoutX="1092.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Staff Catergorizing">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Text layoutX="295.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STAFF'S IMFORMATION  TABLE" wrappingWidth="235.71636962890625">
+      <Text layoutX="409.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STAFF'S IMFORMATION  TABLE" wrappingWidth="235.71636962890625">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Text>
-      <Button alignment="CENTER" layoutX="745.0" layoutY="569.0" mnemonicParsing="false" onAction="#fix" prefHeight="32.0" prefWidth="122.0" text="Fix information" textAlignment="CENTER" />
-      <Text layoutX="820.0" layoutY="539.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select action you want to take " textAlignment="CENTER" wrappingWidth="206.3585205078125">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Text>
-      <Button alignment="CENTER" layoutX="745.0" layoutY="632.0" mnemonicParsing="false" onAction="#gonext" prefHeight="32.0" prefWidth="122.0" text="Listing staff' salary" textAlignment="CENTER" />
-      <Button alignment="CENTER" layoutX="972.0" layoutY="632.0" mnemonicParsing="false" onAction="#gonext2" prefHeight="32.0" prefWidth="122.0" text="Total staff's salary" textAlignment="CENTER" />
-      <TextField fx:id="searchAll" alignment="CENTER" layoutX="36.0" layoutY="588.0" prefHeight="26.0" prefWidth="637.0" promptText="Name, Work Unit or Coefficient Salary" />
-      <Text layoutX="107.0" layoutY="562.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee search bar" textAlignment="CENTER" wrappingWidth="494.9367218017578">
+      <Button alignment="CENTER" layoutX="875.0" layoutY="535.0" mnemonicParsing="false" onAction="#fix" prefHeight="32.0" prefWidth="122.0" text="Fix information" textAlignment="CENTER" />
+      <Button alignment="CENTER" layoutX="875.0" layoutY="600.0" mnemonicParsing="false" onAction="#gonext" prefHeight="32.0" prefWidth="122.0" text="Listing staff' salary" textAlignment="CENTER" />
+      <Button alignment="CENTER" layoutX="1049.0" layoutY="600.0" mnemonicParsing="false" onAction="#gonext2" prefHeight="32.0" prefWidth="122.0" text="Total staff's salary" textAlignment="CENTER" />
+      <TextField fx:id="searchAll" alignment="CENTER" layoutX="90.0" layoutY="538.0" prefHeight="26.0" prefWidth="637.0" promptText="Name, Work Unit or Coefficient Salary" />
+      <Text layoutX="162.0" layoutY="523.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee search bar" textAlignment="CENTER" wrappingWidth="494.9367218017578">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <ChoiceBox fx:id="staffCate" layoutX="1205.0" layoutY="422.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="staffCate" layoutX="1093.0" layoutY="400.0" prefWidth="150.0" />
       <HBox layoutX="36.0" layoutY="28.0">
          <children>
             <MenuBar fx:id="menuBar">
@@ -109,6 +104,7 @@
             </MenuBar>
          </children>
       </HBox>
-      <CheckBox fx:id="rememberWork" layoutX="1214.0" layoutY="456.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="141.0" text="Remember Work Unit" />
+      <CheckBox fx:id="rememberWork" layoutX="1097.0" layoutY="434.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="141.0" text="Remember Work Unit" />
+      <Button alignment="CENTER" layoutX="1214.0" layoutY="558.0" mnemonicParsing="false" onAction="#clearSelection2" prefHeight="32.0" prefWidth="85.0" text="Clear input " textAlignment="CENTER" />
    </children>
 </AnchorPane>
