@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="390.0" prefWidth="637.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label alignment="CENTER" layoutX="227.0" layoutY="65.0" prefHeight="35.0" prefWidth="182.0" text="ABOUT US">
+         <font>
+            <Font name="Tahoma" size="22.0" />
+         </font>
+      </Label>
+      <Text layoutX="46.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The project started on 4/11 and finished  on 20/12" wrappingWidth="491.41680908203125" />
+      <VBox layoutX="64.0" layoutY="136.0" prefHeight="113.0" prefWidth="526.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lê Minh Nghĩa    20207694    IT-VUW 01-K65 " textAlignment="CENTER" wrappingWidth="502.25946044921875">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nguyễn Minh Đức    20207664    IT-VUW 01-K65 " textAlignment="CENTER" wrappingWidth="523.0593872070312">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Phạm Đức Phúc    20207698    IT-VUW 01-K65 " textAlignment="CENTER" wrappingWidth="504.65948486328125">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+         </children>
+      </VBox>
+      <VBox layoutX="44.0" layoutY="299.0" prefHeight="82.0" prefWidth="548.0">
+         <children>
+            <Hyperlink prefHeight="24.0" prefWidth="549.0" text="https://www.youtube.com/watch?v=FLkOX4Eez6o&amp;list=PL6gx4Cwl9DGBzfXLWLSYVy8EbTdpGbUIG" />
+            <Hyperlink prefHeight="24.0" prefWidth="550.0" text="https://www.youtube.com/watch?v=Ope4icw6bVk&amp;t=195s" />
+            <Hyperlink prefHeight="24.0" prefWidth="548.0" text="https://docs.oracle.com/javase/8/javase-clienttechnologies.htm" />
+         </children>
+      </VBox>
+      <Text layoutX="46.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Document:" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="528.0" prefWidth="842.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SecondScene">
+   <children>
+      <Button layoutX="665.0" layoutY="457.0" mnemonicParsing="false" onAction="#btnback" prefHeight="26.0" prefWidth="162.0" text="Back to the main screen" />
+      <TableView fx:id="table3" layoutY="67.0" onMouseClicked="#getSelected1" prefHeight="302.0" prefWidth="842.0">
+         <columns>
+            <TableColumn fx:id="name3Column" prefWidth="132.79995441436768" text="Name" />
+            <TableColumn fx:id="workunit3Column" prefWidth="127.19999694824219" text="Unit" />
+            <TableColumn fx:id="basicsal3Column" prefWidth="116.800048828125" text="Coefficient Salary" />
+            <TableColumn fx:id="bonussal3Column" prefWidth="121.60003662109375" text="Bonus Salary" />
+            <TableColumn fx:id="daysColumn" prefWidth="74.4000122070313" text="Lessons" />
+            <TableColumn fx:id="salarycolumn" prefWidth="143.99993896484375" text="Salary" />
+            <TableColumn fx:id="categoriColumn" prefWidth="122.39999999999998" text="Categorization" />
+         </columns>
+      </TableView>
+      <Text layoutX="254.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LIST OF STAFF'SALARY HIGHER THAN 10000000" wrappingWidth="334.93670654296875">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <TextField fx:id="searchAll" alignment="CENTER" layoutX="102.0" layoutY="378.0" prefHeight="26.0" prefWidth="637.0" promptText="Search Name, Work Unit or Coefficient Salary" />
+   </children>
+</AnchorPane>
